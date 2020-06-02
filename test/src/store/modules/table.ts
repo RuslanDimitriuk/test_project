@@ -7,19 +7,27 @@ Vue.prototype.$axios = axios;
 
 @Module({namespaced: true})
 class TableModule extends VuexModule {
-    public name: string = 'Ruslan'
+    public tableData:  any[] = [];
 
     @Mutation
-    public setName(newName: string): void {
-        this.name = newName
+    public addDataTable(newData: any): void {
+        this.tableData = [];
+        for (let key in newData) {
+            let obj = {
+                key: key,
+                fruit: newData[key].fruit
+            }
+            this.tableData.push(obj);
+        }
     }
 
     @Action({rawError: true})
     public getDataTable(): void {
         axios.get('test.json')
             .then(
-                response =>
-                {console.log(response.data)}
+                response => {
+                    this.context.commit('addDataTable', response.data);
+                }
             )
             .catch(error => {
                     throw error.response
