@@ -8,13 +8,13 @@
                 stripe
                 row-key="key"
                 border
-                style="width: 362px"
                 class="table"
                 :default-sort="{prop: 'key', order: 'ascending'}"
                 :header-cell-style="getStyleHeader">
             <el-table-column
                     prop="key"
                     label="Keys"
+                    :sort-method="sortByKey"
                     sortable
                     :sort-orders="['ascending', 'descending']"
                     order
@@ -43,7 +43,7 @@
         @table.Action
         public getDataTable!: () => void;
 
-        public getStyleHeader(data: any) {
+        public getStyleHeader(data: { column: { order: string } }) {
             if (data.column.order === 'ascending') {
                 return "background: green;"
             }
@@ -55,8 +55,17 @@
             }
         }
 
+//custom sort by the number part of the key
+        public sortByKey(a: { key: string, fruit: string }, b: { key: string, fruit: string }) {
+            let a1: number = +a.key.slice(3, a.key.length + 1);
+            let b1: number = +b.key.slice(3, a.key.length + 1);
+            if (a1 > b1) return 1;
+            if (a1 < b1) return -1;
+            if (a1 === b1) return 0;
+        }
+
         created() {
-            this.getDataTable();
+               this.getDataTable();
         }
     }
 </script>
@@ -65,5 +74,6 @@
 
     .table {
         margin: 20px auto;
+        width: 362px;
     }
 </style>

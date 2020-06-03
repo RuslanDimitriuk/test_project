@@ -1,29 +1,13 @@
-# test
+# test for fantogramma
 
 ## Project setup
-```
 yarn install
-```
-
 ### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+yarn proj:start
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+Номера дополнительных сделанных заданий: 1.
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Время выполнения:
+таблица - 1ч;
+холст - 3ч;
+реализация глобального хранилища - 30 мин;

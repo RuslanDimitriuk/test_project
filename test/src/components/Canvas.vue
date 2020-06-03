@@ -39,7 +39,7 @@
 
         }
 
-        public mouseDownToCanvas(e: any) {
+        public mouseDownToCanvas(e: {offsetX: number,offsetY: number}) {
             let x: number = e.offsetX;
             let y: number = e.offsetY;
             if (this.isCursorInRect(x, y)) {
@@ -50,12 +50,12 @@
             }
         }
 
-        public mouseUpToCanvas(e: any) {
+        public mouseUpToCanvas() {
             this.isSelectedRect = false;
             this.color = 'rgba(0,255,0, .5)';
         }
 
-        public mouseMoveToCanvas(e: any) {
+        public mouseMoveToCanvas(e: {offsetX: number,offsetY: number}) {
             if (this.isSelectedRect) {
                 this.x = e.offsetX + this.selectX;
                 this.y = e.offsetY + this.selectY;
@@ -83,7 +83,7 @@
             this.canvas = this.$refs.drawingCanvas;
             this.context = this.canvas.getContext("2d");
             this.canvas.addEventListener('mousedown', this.mouseDownToCanvas);
-            document.addEventListener('mouseup', this.mouseUpToCanvas);
+            this.$el.addEventListener('mouseup', this.mouseUpToCanvas);
             this.canvas.addEventListener('mousemove', this.mouseMoveToCanvas);
             setInterval(this.createBaseCanvas, 30);
         }

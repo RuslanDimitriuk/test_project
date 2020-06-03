@@ -7,7 +7,7 @@ Vue.prototype.$axios = axios;
 
 @Module({namespaced: true})
 class TableModule extends VuexModule {
-    public tableData:  any[] = [];
+    public tableData:  {key: string, fruit: string}[] = [];
 
     @Mutation
     public addDataTable(newData: any): void {
@@ -16,7 +16,7 @@ class TableModule extends VuexModule {
             let obj = {
                 key: key,
                 fruit: newData[key].fruit
-            }
+            };
             this.tableData.push(obj);
         }
     }
