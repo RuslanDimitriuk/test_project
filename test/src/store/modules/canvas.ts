@@ -13,17 +13,17 @@ class CanvasModule extends VuexModule {
 
     @Mutation
     public addImg(img: any): void {
-        // debugger
-        // this.img.src = img;
+        this.img.src = img;
     }
 
     @Action({rawError: true})
     public getImage(): any {
-            axios.get('test.png', {responseType: 'arraybuffer'})
+            axios.get('test.png', {responseType: 'blob'})
                 .then(
                     response => {
-                        // let inpo: any = Buffer.from(response.data, 'utf8').toString('base64');
-                        this.context.commit('addImg', response.data);
+                        const blob_file = response.data;
+                        const file_url = URL.createObjectURL(blob_file);
+                        this.context.commit('addImg', file_url);
                     }
                 )
                 .catch(error => {

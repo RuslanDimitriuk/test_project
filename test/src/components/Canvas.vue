@@ -4,7 +4,6 @@
             <el-button type="primary" class="btn" @click="$router.push('/')">назад</el-button>
         </div>
         <canvas ref="drawingCanvas" width="500" height="500" class="canvas"></canvas>
-        <img src="http://fantogramma.org/test.png" id="image"/>
     </div>
 </template>
 
@@ -15,7 +14,6 @@
     const canvas = namespace('CanvasModule');
     @Component
     export default class Canvas extends Vue {
-public testImg: any = null;
         public canvas: any = null;
         public context: any = null;
         public x: number = 225;
@@ -72,14 +70,15 @@ public testImg: any = null;
 
         public fillRect(x: number, y: number, color: string) {
             this.context.clearRect(0, 0, 500, 500);
-            this.context.drawImage(this.testImg, 0, 0);
+            if (this.img.src) {
+                this.context.drawImage(this.img, 0, 0);
+            }
             this.context.fillStyle = color;
             this.context.fillRect(x, y, 50, 50);
         }
 
 
         mounted() {
-            this.testImg = document.getElementById('image');
             this.getImage();
             this.canvas = this.$refs.drawingCanvas;
             this.context = this.canvas.getContext("2d");
