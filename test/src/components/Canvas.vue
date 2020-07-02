@@ -18,8 +18,8 @@
         public context: any = null;
         public x: number = 225;
         public y: number = 225;
-        public selectX: number = 10;
-        public selectY: number = 10;
+        public selectX: number = 0;
+        public selectY: number = 0;
         public isSelectedRect: boolean = false;
         public color = 'rgba(0,255,0, .5)';
         @canvas.State
